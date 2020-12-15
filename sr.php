@@ -21,7 +21,10 @@ foreach ($html->find('div[class=ZINbbc xpd O9g5cc uUPGi]') as $video) {
 
 
         $videoTitle = str_replace(' - YouTube','', $videoDetails->find('h3', 0)->plaintext);
-
+                                      $parts = preg_split ("/(?=\.\w+)(?!.*\..*\.)/", $videoTitle);
+$filename = preg_replace('/[^A-Za-z0-9]+/', ' ', $parts[0]);
+$filename = preg_replace('/_$/', '', $filename);
+$file = $filename;
 
         $videoUrl = urldecode($videoDetails->find('a', 0)->href);
         $videUrl = explode("=",$videoUrl);
@@ -30,14 +33,14 @@ foreach ($html->find('div[class=ZINbbc xpd O9g5cc uUPGi]') as $video) {
         $videoDate = $videoDatee->find('span', 0)->plaintext;
 
         $videos[] = [
-                'title' => $videoTitle,
+                'title' => $file,
                 'url' => $videoUrl,
                 'date' => $videoDate
         ];
 
         $i++;
 }
-header('Content-Type: application/json');
+
 echo '{ "status" : "success", "items" :' . json_encode($videos, JSON_UNESCAPED_UNICODE) . '}';
 
 //echo $html;
