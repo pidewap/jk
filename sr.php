@@ -25,7 +25,7 @@ foreach ($html->find('div[class=ZINbbc xpd O9g5cc uUPGi]') as $video) {
 
         $videoUrl = urldecode($videoDetails->find('a', 0)->href);
         $videUrl = explode("=",$videoUrl);
-        $videoUrl = str_replace("&sa", "", $videUrl[2]);
+       $videoUrl = substr($videUrl[2], 0, 11);
         $videoDatee = $video->find('div[class=BNeawe s3v9rd AP7Wnd]', 0);
         $videoDate = $videoDatee->find('span', 0)->plaintext;
 
