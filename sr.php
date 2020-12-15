@@ -37,7 +37,7 @@ foreach ($html->find('div[class=ZINbbc xpd O9g5cc uUPGi]') as $video) {
 
         $i++;
 }
-
+header('Content-Type: application/json');
 echo '{ "status" : "success", "items" :' . json_encode($videos, JSON_UNESCAPED_UNICODE) . '}';
 
 //echo $html;
